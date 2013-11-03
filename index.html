@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Call Me Names!</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="data/people.js"></script>
+<script type="text/javascript">
+var people = [];
+var current_person = -1;
+var state = 'init';
+
+$(function() {
+	/* // getting the data from a server
+	$.getJSON('data/people.js', function(data) {
+		people = data;
+	}); */
+	people = get_people();
+	$("#next").focus();
+});
+
+function next() {
+	if (state === 'reveal') {
+		$("#person_name").removeClass('invisible');
+		$("#next").attr('value', 'Next one!');
+		state = 'show';
+		
+	} else {
+		$("#person_pic").removeClass('invisible');
+		$("#person_name").addClass('invisible');
+		show_next();
+		$("#next").attr('value', 'Show me!');
+		state = 'reveal';
+	}
+}
+
+function show_next() {
+	var next_person;
+	do {
+		next_person = Math.floor(Math.random() * people.length)
+	} while (next_person === current_person);
+	current_person = next_person;
+	
+	var person = people[current_person];
+	$('#person_name').html(person[0]);
+	$('#person_pic').attr('src', 'data/pics/' + person[1]);
+}
+</script>
+</head>
+
+<body>
+<div id="main">
+<div id="picframe_outer"><div id="picframe_inner">
+	<img class="invisible" id="person_pic" src="" alt="picture" /><br />
+	<div id="caption">
+		<span class="invisible" id="person_name"></span>
+	</div>
+</div></div>
+<input type="button" id="next" name="next" value="Go!" onclick="next()" />
+</div>
+</body>
+</html>
+
