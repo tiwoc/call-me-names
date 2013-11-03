@@ -2,6 +2,8 @@
 
 Helping you to learn and remember the names of e.g. your coworkers. HTML/CSS/JS only!
 
+Try it out: [>>> Demo <<<](http://tiwoc.github.io/call-me-names)
+
 ## What you need
 * pictures of your coworkers
 * a text editor
